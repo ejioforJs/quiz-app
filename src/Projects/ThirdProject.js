@@ -303,7 +303,7 @@ class ThirdProject extends React.Component {
           option1: 'Increased',
           option2: 'Decreased',
           option3: 'Constant',
-          option4: 'Halved',
+          option4: 'Halve',
           step: 0,
           answer: 'Increased',
           ans: 0,
