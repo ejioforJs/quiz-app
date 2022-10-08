@@ -27,6 +27,7 @@ class FifthProject extends React.Component{
     
     render(){
         const answernum=JSON.parse(localStorage.getItem("answerche")) + JSON.parse(localStorage.getItem("answerphy"))
+        const totalTime = JSON.parse(localStorage.getItem("totalTime"))
         // console.log(JSON.parse(localStorage.getItem("answerche")))
         return(
             <div className="mainBox">
@@ -45,7 +46,7 @@ class FifthProject extends React.Component{
                 </div>
                 <div className="secondBox">
                     <img alt="" src={image15} className="image15" />
-                    <div className="result" >You answered {answernum}/30 questions correctly in 25 minutes</div>
+                    <div className="result" >You answered {answernum}/30 questions correctly in about {totalTime} minutes</div>
                     <button onClick={this.closePage} className="closePage"><span className="closeIcon">x</span>       Close</button>
                     <img alt="" src={img6} className="image6" />
                     <img alt="" src={img7} className="image7" />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

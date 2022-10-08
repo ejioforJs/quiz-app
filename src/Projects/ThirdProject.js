@@ -2214,27 +2214,22 @@ class ThirdProject extends React.Component {
   endTestP = () => {
     var number = 0;
     var act = 0;
-    console.log(this.state.quiz)
-    console.log(this.state.quizP)
     while (act < this.state.quizP.length) {
       number += this.state.quizP[act].ans;
       act++;
     }
-    console.log(number)
     localStorage.setItem('answerphy', JSON.stringify(number));
-    console.log(JSON.parse(localStorage.getItem('answerphy')))
     var number2 = 0;
     var act2 = 0;
     while (act2 < this.state.quiz.length) {
       number2 += this.state.quiz[act2].ans;
       act2++;
     }
-    console.log(number2)
     localStorage.setItem('answerche', JSON.stringify(number2));
-    console.log(JSON.parse(localStorage.getItem('answerche')))
     this.setState({
       release: this.state.release === clearInterval(this.state.release),
     });
+    localStorage.setItem('totalTime', JSON.stringify(this.state.hour))
     this.props.history.push({
       pathname: '/fifth',
     });
