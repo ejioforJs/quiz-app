@@ -27,7 +27,7 @@ class FifthProject extends React.Component{
     
     render(){
         const answernum=JSON.parse(localStorage.getItem("answerche")) + JSON.parse(localStorage.getItem("answerphy"))
-        const totalTime = JSON.parse(localStorage.getItem("totalTime"))
+        const totalTime = 25 - (JSON.parse(localStorage.getItem("totalTime")))
         // console.log(JSON.parse(localStorage.getItem("answerche")))
         return(
             <div className="mainBox">
