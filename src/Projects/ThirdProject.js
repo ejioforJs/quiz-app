@@ -24,7 +24,7 @@ class ThirdProject extends React.Component {
       zero2: 0,
       hour: 24,
       zero: 0,
-      resume: 59,
+      minute: 59,
       num: 0,
       start: new Date().toLocaleTimeString('en-US').replace(/(.*)\D\d+/, '$1'),
       stop: new Date(new Date().getTime() + 30 * 60 * 1000)
@@ -281,7 +281,7 @@ class ThirdProject extends React.Component {
           option3: 'Increases',
           option4: 'Becomes zero',
           step: 0,
-          answer: 'Remain constant',
+          answer: 'Remains constant',
           ans: 0,
         },
 
@@ -676,18 +676,23 @@ class ThirdProject extends React.Component {
           this.state.quiz[this.state.num].option1 ===
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 1}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 1,
+            quiz:mainQuiz
           }));
         }
         if (
           this.state.quiz[this.state.num].option1 !==
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 0}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 0,
+            quiz:mainQuiz
           }));
         }
+        console.log(this.state.quiz)
         if (this.state.num === 0) {
           document.querySelector('.oneC').id = 'picked';
         }
@@ -753,18 +758,23 @@ class ThirdProject extends React.Component {
           this.state.quiz[this.state.num].option2 ===
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 1}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 1,
+            quiz:mainQuiz
           }));
         }
         if (
           this.state.quiz[this.state.num].option2 !==
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 0}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 0,
+            quiz:mainQuiz
           }));
         }
+        console.log(this.state.quiz)
         if (this.state.num === 0) {
           document.querySelector('.oneC').id = 'picked';
         }
@@ -830,18 +840,23 @@ class ThirdProject extends React.Component {
           this.state.quiz[this.state.num].option3 ===
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 1}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 1,
+            quiz:mainQuiz
           }));
         }
         if (
           this.state.quiz[this.state.num].option3 !==
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 0}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 0,
+            quiz:mainQuiz
           }));
         }
+        console.log(this.state.quiz)
         if (this.state.num === 0) {
           document.querySelector('.oneC').id = 'picked';
         }
@@ -907,18 +922,23 @@ class ThirdProject extends React.Component {
           this.state.quiz[this.state.num].option4 ===
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 1}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 1,
+            quiz:mainQuiz
           }));
         }
         if (
           this.state.quiz[this.state.num].option4 !==
           this.state.quiz[this.state.num].answer
         ) {
+          const mainQuiz = [...this.state.quiz]
+          mainQuiz[this.state.num] = {...this.state.quiz[this.state.num], ans: 0}
           this.setState(() => ({
-            ans: this.state.quiz[this.state.num].ans === 0,
+            quiz:mainQuiz
           }));
         }
+        console.log(this.state.quiz)
         if (this.state.num === 0) {
           document.querySelector('.oneC').id = 'picked';
         }
@@ -1230,34 +1250,33 @@ class ThirdProject extends React.Component {
         this.state.release ===
         setInterval(() => {
           this.setState(() => ({
-            z: this.state.z - 1,
+            minute: this.state.minute - 1,
           }));
-          if (this.state.a === 0) {
+          if (this.state.minute === 0) {
+            this.setState(() => ({
+              hour: this.state.hour - 1,
+              minute: this.state.minute + 59
+            }));
+          }
+          if (this.state.hour === 0) {
             this.props.history.push({
               pathname: '/fifth',
             });
           }
-          if (this.state.z === 0) {
-            this.setState(() => ({
-              a: this.state.a - 1,
-            }));
-            this.setState(() => ({ hour: this.state.hour === this.state.a }));
-            this.setState(() => ({
-              z: this.state.z === 59,
-            }));
-          }
-          if (this.state.z <= 9) {
-            document.querySelector('.zero').id = 'displayed';
-          }
-          if (this.state.z === 59) {
-            document.querySelector('.zero').id = 'notDisplayed';
-          }
-          if (this.state.a <= 9) {
-            document.querySelector('.zero2').id = 'displayed';
-          }
-          this.setState(() => ({
-            resume: this.state.resume === this.state.z,
-          }));
+          // if (this.state.minute <= 9) {
+          //   document.querySelector('.zero').id = 'displayed';
+          // }else{
+          //   document.querySelector('.zero').id = 'notDisplayed'
+          // }
+          // if (this.state.z === 59) {
+          //   document.querySelector('.zero').id = 'notDisplayed';
+          // }
+          // if (this.state.a <= 9) {
+          //   document.querySelector('.zero2').id = 'displayed';
+          // }
+          // this.setState(() => ({
+          //   resume: this.state.resume === this.state.z,
+          // }));
         }, 1000),
     });
 
@@ -1282,15 +1301,15 @@ class ThirdProject extends React.Component {
   }
 
   physicsTest = () => {
-    /*  localStorage.setItem("startTime",JSON.stringify(this.state.start))
-        localStorage.setItem("stopTime",JSON.stringify(this.state.stop))
-        localStorage.setItem("zero2",JSON.stringify(this.state.zero2))
-        localStorage.setItem("hour",JSON.stringify(this.state.hour))
-        localStorage.setItem("zero",JSON.stringify(this.state.zero))
-        localStorage.setItem("resume",JSON.stringify(this.state.resume))
-        this.props.history.push({
-            pathname:'/fourth'
-        }) */
+      // localStorage.setItem("startTime",JSON.stringify(this.state.start))
+      //   localStorage.setItem("stopTime",JSON.stringify(this.state.stop))
+        // localStorage.setItem("zero2",JSON.stringify(this.state.zero2))
+        // localStorage.setItem("hour",JSON.stringify(this.state.hour))
+        // localStorage.setItem("zero",JSON.stringify(this.state.zero))
+        // localStorage.setItem("resume",JSON.stringify(this.state.resume))
+        // this.props.history.push({
+        //     pathname:'/fourth'
+        // }) 
     document.querySelector('.mainBoxC').id = 'notDisplayed';
     document.querySelector('.mainBoxP').id = 'displayed';
     document.querySelector('.physicsP').id = 'quesDisplay';
@@ -1603,16 +1622,20 @@ class ThirdProject extends React.Component {
           this.state.quizP[this.state.numP].option1 ===
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 1}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 1,
+            quizP:mainQuiz
           }));
         }
         if (
           this.state.quizP[this.state.numP].option1 !==
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 0}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 0,
+            quizP:mainQuiz
           }));
         }
         if (this.state.numP === 0) {
@@ -1683,16 +1706,20 @@ class ThirdProject extends React.Component {
           this.state.quizP[this.state.numP].option2 ===
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 1}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 1,
+            quizP:mainQuiz
           }));
         }
         if (
           this.state.quizP[this.state.numP].option2 !==
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 0}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 0,
+            quizP:mainQuiz
           }));
         }
         if (this.state.numP === 0) {
@@ -1763,16 +1790,20 @@ class ThirdProject extends React.Component {
           this.state.quizP[this.state.numP].option3 ===
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 1}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 1,
+            quizP:mainQuiz
           }));
         }
         if (
           this.state.quizP[this.state.numP].option3 !==
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 0}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 0,
+            quizP:mainQuiz
           }));
         }
         if (this.state.numP === 0) {
@@ -1843,16 +1874,20 @@ class ThirdProject extends React.Component {
           this.state.quizP[this.state.numP].option4 ===
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 1}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 1,
+            quizP:mainQuiz
           }));
         }
         if (
           this.state.quizP[this.state.numP].option4 !==
           this.state.quizP[this.state.numP].answer
         ) {
+          const mainQuiz = [...this.state.quizP]
+          mainQuiz[this.state.numP] = {...this.state.quizP[this.state.numP], ans: 0}
           this.setState(() => ({
-            ans: this.state.quizP[this.state.numP].ans === 0,
+            quizP:mainQuiz
           }));
         }
         if (this.state.numP === 0) {
@@ -2161,15 +2196,15 @@ class ThirdProject extends React.Component {
   };
 
   chemistryTest = () => {
-    /* localStorage.setItem("startTime",JSON.stringify(this.state.start))
-        localStorage.setItem("stopTime",JSON.stringify(this.state.stop))
-        localStorage.setItem("zero2",JSON.stringify(this.state.zero2))
-        localStorage.setItem("hour",JSON.stringify(this.state.hour))
-        localStorage.setItem("zero",JSON.stringify(this.state.zero))
-        localStorage.setItem("resume",JSON.stringify(this.state.resume))
-        this.props.history.push({
-            pathname:'/third'
-        }) */
+        // localStorage.setItem("startTime",JSON.stringify(this.state.start))
+        // localStorage.setItem("stopTime",JSON.stringify(this.state.stop))
+        // localStorage.setItem("zero2",JSON.stringify(this.state.zero2))
+        // localStorage.setItem("hour",JSON.stringify(this.state.hour))
+        // localStorage.setItem("zero",JSON.stringify(this.state.zero))
+        // localStorage.setItem("resume",JSON.stringify(this.state.resume))
+        // this.props.history.push({
+        //     pathname:'/third'
+        // }) 
     document.querySelector('.mainBoxC').id = 'displayed';
     document.querySelector('.mainBoxP').id = 'notDisplayed';
     document.querySelector('.chemistryC').id = 'quesDisplay';
@@ -2179,18 +2214,24 @@ class ThirdProject extends React.Component {
   endTestP = () => {
     var number = 0;
     var act = 0;
+    console.log(this.state.quiz)
+    console.log(this.state.quizP)
     while (act < this.state.quizP.length) {
       number += this.state.quizP[act].ans;
       act++;
     }
-    localStorage.setItem('answerphy', number);
+    console.log(number)
+    localStorage.setItem('answerphy', JSON.stringify(number));
+    console.log(JSON.parse(localStorage.getItem('answerphy')))
     var number2 = 0;
     var act2 = 0;
     while (act2 < this.state.quiz.length) {
       number2 += this.state.quiz[act2].ans;
       act2++;
     }
-    localStorage.setItem('answerche', number2);
+    console.log(number2)
+    localStorage.setItem('answerche', JSON.stringify(number2));
+    console.log(JSON.parse(localStorage.getItem('answerche')))
     this.setState({
       release: this.state.release === clearInterval(this.state.release),
     });
@@ -2199,9 +2240,9 @@ class ThirdProject extends React.Component {
     });
   };
 
-  componentWillUnmount() {
-    localStorage.setItem('corrections', JSON.stringify(this.state.quiz));
-  }
+  // componentWillUnmount() {
+  //   localStorage.setItem('corrections', JSON.stringify(this.state.quiz));
+  // }
 
   render() {
     return (
@@ -2253,12 +2294,12 @@ class ThirdProject extends React.Component {
                 <span style={{ color: 'rgb(125,35,135)' }}>
                   Remaining Time:
                 </span>
-                <span
+                {/* <span
                   className="zero2"
                   style={{ color: 'black', fontWeight: '600', display: 'none' }}
                 >
                   {this.state.zero2}
-                </span>
+                </span> */}
                 <span
                   className="hour"
                   style={{ color: 'black', fontWeight: '600' }}
@@ -2266,17 +2307,17 @@ class ThirdProject extends React.Component {
                   {this.state.hour}
                 </span>
                 <span>:</span>
-                <span
+                {/* <span
                   className="zero"
                   style={{ color: 'black', fontWeight: '600', display: 'none' }}
                 >
                   {this.state.zero}
-                </span>
+                </span> */}
                 <span
                   className="resume"
                   style={{ color: 'black', fontWeight: '600' }}
                 >
-                  {this.state.resume}
+                  {this.state.minute}
                 </span>
               </h2>
             </div>
@@ -2488,12 +2529,12 @@ class ThirdProject extends React.Component {
                 <span style={{ color: 'rgb(125,35,135)' }}>
                   Remaining Time:
                 </span>
-                <span
+                {/* <span
                   className="zero2"
                   style={{ color: 'black', fontWeight: '600', display: 'none' }}
                 >
                   {this.state.zero2}
-                </span>
+                </span> */}
                 <span
                   className="hour"
                   style={{ color: 'black', fontWeight: '600' }}
@@ -2501,17 +2542,17 @@ class ThirdProject extends React.Component {
                   {this.state.hour}
                 </span>
                 <span>:</span>
-                <span
+                {/* <span
                   className="zero"
                   style={{ color: 'black', fontWeight: '600', display: 'none' }}
                 >
                   {this.state.zero}
-                </span>
+                </span> */}
                 <span
                   className="resume"
                   style={{ color: 'black', fontWeight: '600' }}
                 >
-                  {this.state.resume}
+                  {this.state.minute}
                 </span>
               </h2>
             </div>

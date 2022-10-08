@@ -27,6 +27,7 @@ class FifthProject extends React.Component{
     
     render(){
         const answernum=JSON.parse(localStorage.getItem("answerche")) + JSON.parse(localStorage.getItem("answerphy"))
+        // console.log(JSON.parse(localStorage.getItem("answerche")))
         return(
             <div className="mainBox">
                 <div className="firstBox">
